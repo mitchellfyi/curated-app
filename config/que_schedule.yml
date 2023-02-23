@@ -1,0 +1,2 @@
+FetchSources:
+  cron: "@hourly"

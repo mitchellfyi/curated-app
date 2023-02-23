@@ -5,6 +5,7 @@ class CreateSources < ActiveRecord::Migration[7.0]
       t.string :url
 
       t.timestamps
+      t.datetime :fetched_at
     end
   end
 end
