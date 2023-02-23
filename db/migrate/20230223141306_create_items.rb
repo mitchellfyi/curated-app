@@ -3,7 +3,8 @@ class CreateItems < ActiveRecord::Migration[7.0]
     create_table :items do |t|
       t.string :title
       t.string :url
-      t.text :description
+      t.text :content
+      t.belongs_to :source, null: true, foreign_key: true
 
       t.timestamps
     end
