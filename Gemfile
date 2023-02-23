@@ -70,3 +70,11 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+gem "que", "~> 2.2"
+
+gem "que-web", "~> 0.10.0"
+
+gem "que-scheduler", "~> 4.4"
+
+gem "que-unique", "~> 1.0"
