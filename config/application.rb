@@ -24,5 +24,9 @@ module Curated
     config.action_mailer.default_url_options = { host: Rails.application.credentials.dig(:app, :host) }
 
     config.session_store :cookie_store, domain: :all, tld_length: 2
+
+    config.generators do |g|
+      g.orm :active_record, primary_key_type: :uuid
+    end
   end
 end
