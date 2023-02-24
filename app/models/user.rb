@@ -2,6 +2,9 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :timeoutable, :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :confirmable, :lockable, :trackable
+  rolify
+
+  accepts_nested_attributes_for :roles
 
   validates :email, presence: true, uniqueness: true
   validates :username, uniqueness: { case_sensitive: false }, if: -> { username.present? }

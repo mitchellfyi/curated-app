@@ -81,3 +81,4 @@ gem 'que-unique', '~> 1.0'
 gem 'que-web', '~> 0.10.0'
 
 gem 'devise', '~> 4.9'
+gem 'rolify', '~> 6.0'

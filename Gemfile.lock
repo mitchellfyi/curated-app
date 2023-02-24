@@ -202,6 +202,7 @@ GEM
       actionpack (>= 5.2)
       railties (>= 5.2)
     rexml (3.2.5)
+    rolify (6.0.1)
     rubocop (1.46.0)
       json (~> 2.3)
       parallel (~> 1.10)
@@ -281,6 +282,7 @@ DEPENDENCIES
   que-unique (~> 1.0)
   que-web (~> 0.10.0)
   rails (~> 7.0.4, >= 7.0.4.2)
+  rolify (~> 6.0)
   rubocop (~> 1.46)
   selenium-webdriver
   sprockets-rails
