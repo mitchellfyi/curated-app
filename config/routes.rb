@@ -4,7 +4,8 @@ require "que/web"
 Rails.application.routes.draw do
   mount Que::Web => "/secret/que"
 
-  pp ApplicationController.helpers.app_uri
+  devise_for :users
+  
   constraints host: ApplicationController.helpers.app_uri.host do
     resources :accounts
   end

@@ -19,10 +19,10 @@ gem "puma", "~> 5.0"
 gem "importmap-rails"
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
-# gem "turbo-rails"
+gem "turbo-rails"
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
-# gem "stimulus-rails"
+gem "stimulus-rails"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
@@ -80,3 +80,5 @@ gem "que-scheduler", "~> 4.4"
 gem "que-unique", "~> 1.0"
 
 gem "acts_as_tenant", "~> 0.6.1"
+
+gem "devise", "~> 4.9"

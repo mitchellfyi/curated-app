@@ -1,5 +1,6 @@
 class AccountsController < ApplicationController
   skip_before_action :set_tenant
+  before_action :authenticate_user!
   before_action :set_account, only: %i[ show edit update destroy ]
 
   # GET /accounts

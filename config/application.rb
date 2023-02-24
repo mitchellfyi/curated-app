@@ -20,5 +20,9 @@ module Curated
     # config.eager_load_paths << Rails.root.join("extras")
 
     config.hosts.clear
+
+    config.action_mailer.default_url_options = { host: Rails.application.credentials.dig(:app, :host) }
+
+    config.session_store :cookie_store, domain: :all, tld_length: 2
   end
 end
