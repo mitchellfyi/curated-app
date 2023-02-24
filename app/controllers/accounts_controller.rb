@@ -5,7 +5,7 @@ class AccountsController < ApplicationController
 
   # GET /accounts
   def index
-    @accounts = Account.all
+    @accounts = policy_scope(Account)
   end
 
   # GET /accounts/1
@@ -15,6 +15,7 @@ class AccountsController < ApplicationController
   # GET /accounts/new
   def new
     @account = Account.new
+    authorize @account
   end
 
   # GET /accounts/1/edit
@@ -26,6 +27,8 @@ class AccountsController < ApplicationController
     @account = Account.new(account_params)
 
     if @account.save
+      current_user.add_role(:owner, @account)
+      current_user.add_role(:staff, @account)
       redirect_to @account, notice: "Account was successfully created."
     else
       render :new, status: :unprocessable_entity
@@ -51,6 +54,7 @@ class AccountsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_account
       @account = Account.find(params[:id])
+      authorize @account
     end
 
     # Only allow a list of trusted parameters through.

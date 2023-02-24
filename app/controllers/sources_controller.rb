@@ -3,7 +3,7 @@ class SourcesController < ApplicationController
 
   # GET /sources
   def index
-    @sources = Source.all
+    @sources = policy_scope(Source)
   end
 
   # GET /sources/1
@@ -13,6 +13,7 @@ class SourcesController < ApplicationController
   # GET /sources/new
   def new
     @source = Source.new
+    authorize @source
   end
 
   # GET /sources/1/edit
@@ -24,6 +25,8 @@ class SourcesController < ApplicationController
     @source = Source.new(source_params)
 
     if @source.save
+      current_user.add_role(:owner, @source)
+      current_user.add_role(:staff, @source)
       redirect_to @source, notice: "Source was successfully created."
     else
       render :new, status: :unprocessable_entity
@@ -49,6 +52,7 @@ class SourcesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_source
       @source = Source.find(params[:id])
+      authorize @source
     end
 
     # Only allow a list of trusted parameters through.

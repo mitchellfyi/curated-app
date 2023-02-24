@@ -148,6 +148,8 @@ GEM
     public_suffix (5.0.1)
     puma (5.6.5)
       nio4r (~> 2.0)
+    pundit (2.3.0)
+      activesupport (>= 3.0.0)
     que (2.2.0)
     que-scheduler (4.4.0)
       activesupport (>= 5.0)
@@ -277,6 +279,7 @@ DEPENDENCIES
   importmap-rails
   pg (~> 1.1)
   puma (~> 5.0)
+  pundit (~> 2.3)
   que (~> 2.2)
   que-scheduler (~> 4.4)
   que-unique (~> 1.0)

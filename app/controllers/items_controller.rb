@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
 
   # GET /items
   def index
-    @items = Item.all
+    @items = policy_scope(Item)
   end
 
   # GET /items/1
@@ -13,6 +13,7 @@ class ItemsController < ApplicationController
   # GET /items/new
   def new
     @item = Item.new
+    authorize @item
   end
 
   # GET /items/1/edit
@@ -24,6 +25,8 @@ class ItemsController < ApplicationController
     @item = Item.new(item_params)
 
     if @item.save
+      current_user.add_role(:owner, @item)
+      current_user.add_role(:staff, @item)
       redirect_to @item, notice: "Item was successfully created."
     else
       render :new, status: :unprocessable_entity
@@ -49,6 +52,7 @@ class ItemsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_item
       @item = Item.find(params[:id])
+      authorize @item
     end
 
     # Only allow a list of trusted parameters through.
