@@ -1,4 +1,5 @@
 class SourcesController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_source, only: %i[ show edit update destroy ]
 
   # GET /sources
