@@ -12,5 +12,11 @@
 
   <body>
     <%= yield %>
+
+    <footer>
+      <% if current_tenant %>
+        <%= link_to "Powered by #{Rails.application.credentials.dig(:app, :name)}", root_url(subdomain: false) %>
+      <% end %>
+    </footer>
   </body>
 </html>

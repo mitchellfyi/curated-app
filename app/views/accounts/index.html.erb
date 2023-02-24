@@ -1,0 +1,15 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Accounts</h1>
+
+<div id="accounts">
+  <% @accounts.each do |account| %>
+    <p>
+      <%= link_to account.domain_or_subdomain, account.url %>
+      <br />
+      <%= link_to "Show this account", account %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New account", new_account_path %>

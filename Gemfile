@@ -78,3 +78,5 @@ gem "que-web", "~> 0.10.0"
 gem "que-scheduler", "~> 4.4"
 
 gem "que-unique", "~> 1.0"
+
+gem "acts_as_tenant", "~> 0.6.1"

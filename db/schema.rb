@@ -14,13 +14,22 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_23_142837) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "accounts", force: :cascade do |t|
+    t.string "subdomain"
+    t.string "domain"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "items", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.bigint "source_id"
     t.string "title"
     t.string "url"
     t.text "content"
-    t.bigint "source_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_items_on_account_id"
     t.index ["source_id"], name: "index_items_on_source_id"
   end
 
@@ -85,13 +94,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_23_142837) do
   end
 
   create_table "sources", force: :cascade do |t|
+    t.bigint "account_id", null: false
     t.string "title"
     t.string "url"
+    t.datetime "fetched_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "fetched_at"
+    t.index ["account_id"], name: "index_sources_on_account_id"
   end
 
+  add_foreign_key "items", "accounts"
   add_foreign_key "items", "sources"
   add_foreign_key "que_scheduler_audit_enqueued", "que_scheduler_audit", column: "scheduler_job_id", primary_key: "scheduler_job_id", name: "que_scheduler_audit_enqueued_scheduler_job_id_fkey"
+  add_foreign_key "sources", "accounts"
 end
