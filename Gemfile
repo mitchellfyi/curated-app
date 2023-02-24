@@ -73,6 +73,8 @@ group :test do
   gem 'webdrivers'
 end
 
+gem 'foreman', '~> 0.87.2'
+
 gem 'acts_as_tenant', '~> 0.6.1'
 
 gem 'que', '~> 2.2'
