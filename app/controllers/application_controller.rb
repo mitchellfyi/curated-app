@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   include Pundit::Authorization
 
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
   set_current_tenant_through_filter
 
   before_action :set_tenant
@@ -50,5 +52,10 @@ class ApplicationController < ActionController::Base
 
   def store_user_location!
     store_location_for(:user, request.fullpath)
+  end
+
+  def user_not_authorized
+    flash[:alert] = 'You are not authorized to perform this action.'
+    redirect_back(fallback_location: root_path)
   end
 end
