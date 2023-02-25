@@ -6,7 +6,7 @@ class Source < ApplicationRecord
 
   validates_uniqueness_to_tenant :url
 
-  def fetch!
+  def fetch_items!
     update(fetched_at: Time.now)
   end
 end

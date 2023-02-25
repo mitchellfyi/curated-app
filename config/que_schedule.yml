@@ -1,2 +1,2 @@
-FetchSources:
+SourceFetch:
   cron: "@hourly"
