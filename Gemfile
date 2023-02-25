@@ -85,3 +85,5 @@ gem 'que-web', '~> 0.10.0'
 gem 'devise', '~> 4.9'
 gem 'pundit', '~> 2.3'
 gem 'rolify', '~> 6.0'
+
+gem 'acts-as-taggable-on', '~> 9.0'
