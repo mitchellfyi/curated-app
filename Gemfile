@@ -87,3 +87,5 @@ gem 'pundit', '~> 2.3'
 gem 'rolify', '~> 6.0'
 
 gem 'acts-as-taggable-on', '~> 9.0'
+
+gem "annotate", "~> 3.2"
