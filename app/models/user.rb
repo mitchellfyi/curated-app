@@ -9,9 +9,16 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   validates :username, uniqueness: { case_sensitive: false }, if: -> { username.present? }
 
-  before_save :set_username
+  before_save :downcase_email
+  before_save :set_username, if: proc { username.blank? }
+
+  def downcase_email
+    self.email = email.downcase
+  end
 
   def set_username
-    self.username = email.split('@')[0] if username.blank?
+    return unless username.blank?
+
+    self.username = email.split('@').first
   end
 end
