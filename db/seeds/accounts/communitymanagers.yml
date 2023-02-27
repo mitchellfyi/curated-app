@@ -1,0 +1,43 @@
+name: Community Managers
+domain: cmgr.cx
+keyphrases:
+  - Community Manager
+  - Community Engagement
+  - Social Network
+sources_attributes:
+  - name: CMX
+    url: https://cmxhub.com/feed/
+    tag_list:
+      - name: Article
+  - name: Tribe Blog
+    url: https://tribe.so/feed/
+    tag_list:
+      - name: Article
+  - name: Community Weekly
+    url: https://communityweekly.co/blog/rss/
+    tag_list:
+      - name: Article
+  - name: Community Roundtable
+    url: https://communityroundtable.com/feed/podcast/
+    tag_list:
+      - name: Article
+  - name: Community by Association
+    url: https://www.communitybyassociation.com/blog?format=rss
+    tag_list:
+      - name: Article
+  - name: Hivebrite
+    url: https://blog.hivebrite.com/rss.xml
+    tag_list:
+      - name: Article
+  - name: FeverBee
+    url: https://www.feverbee.com/feed/
+    tag_list:
+      - name: Article
+  - name: PeerBoard
+    url: https://peerboard.com/blog/feed/
+    tag_list:
+      - name: Article
+  - name: Khorus
+    url: https://community.khoros.com/lithosphere/rss/board?board.id=lithiumblog
+    tag_list:
+      - name: Article

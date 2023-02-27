@@ -19,6 +19,7 @@ class CreateTagsAato < ActiveRecord::Migration[7.0]
       t.integer :visibility, null: false, default: 0
 
       t.integer :tag_list_count, null: false, default: 0
+      t.integer :taggings_count, null: false, default: 0
 
       t.datetime :deleted_at
       t.timestamps

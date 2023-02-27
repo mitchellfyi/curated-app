@@ -1,0 +1,164 @@
+
+- name: BBC News - World
+  url: http://feeds.bbci.co.uk/news/world/rss.xml
+  tag_list:
+    - News
+    - World
+- name: Axios
+  url: https://api.axios.com/feed/
+  tag_list:
+    - News
+    - World
+- name: The New York Times - World News
+  url: https://www.nytimes.com/svc/collections/v1/publish/https://www.nytimes.com/section/world/rss.xml
+  tag_list:
+    - News
+    - World
+- name: Al Jazeera
+  url: https://www.aljazeera.com/xml/rss/all.xml
+  tag_list:
+    - News
+    - World
+- name: The Financial Times
+  url: https://www.ft.com/rss/home
+  tag_list:
+    - News
+    - World
+    - Finance
+- name: Vox
+  url: https://www.vox.com/rss/index.xml
+  tag_list:
+    - News
+- name: The Verge
+  url: https://www.theverge.com/rss/index.xml
+  tag_list:
+    - News
+    - Technology
+- name: Aeon
+  url: https://aeon.co/feed.rss
+  tag_list:
+    - Article
+- name: Nautilus
+  url: https://nautil.us/feed/
+  tag_list:
+    - Article
+    - Science
+- name: Longreads
+  url: https://longreads.com/feed/
+  tag_list:
+    - Article
+- name: The New Yorker
+  url: https://www.newyorker.com/feed/everything
+  tag_list:
+    - Article
+    - News
+- name: Freethink
+  url: https://www.freethink.com/feed/all
+  tag_list:
+    - Article
+- name: Hacker News - Front Page
+  url: https://hnrss.org/frontpage
+  tag_list:
+    - News
+    - Technology
+- name: Hacker News - Asks
+  url: https://hnrss.org/ask
+  tag_list:
+    - Question
+    - Technology
+- name: Hacker News - Launches
+  url: https://hnrss.org/launches
+  tag_list:
+    - App
+    - Technology
+- name: Hacker News - Show
+  url: https://hnrss.org/show
+  tag_list:
+    - App
+    - Technology
+- name: Indeed
+  url: https://www.indeed.com/rss
+  tag_list:
+    - Job
+- name: Hacker News - Jobs
+  url: https://hnrss.org/jobs
+  tag_list:
+    - Job
+    - Technology
+- name: Hacker News - Jobs
+  url: https://hnrss.org/whoishiring/jobs
+  tag_list:
+    - Job
+    - Technology
+- name: Hacker News - Freelance Jobs
+  url: https://hnrss.org/whoishiring/freelance
+  tag_list:
+    - Job
+    - Freelance
+        - Technology
+- name: WeWorkRemotely
+  url: https://weworkremotely.com/remote-jobs.rss
+  tag_list:
+    - Job
+    - Remote
+- name: RemoteOK
+  url: https://remoteok.com/remote-jobs.rss
+  tag_list:
+    - Job
+    - Remote
+- name: Insider
+  url: https://feeds.insider.com/custom/insider-all
+  tag_list:
+    - News
+- name: Business Insider
+  url: https://feeds.businessinsider.com/custom/all
+  tag_list:
+    - News
+    - Business
+- name: Reviews.com
+  url: https://www.reviews.com/feed/
+  tag_list:
+    - Article
+- name: Makeuseof
+  url: http://feeds.feedburner.com/Makeuseof?format=xml
+  tag_list:
+    - Article
+    - Technology
+- name: Lifehacker
+  url: https://lifehacker.com/rss
+  tag_list:
+    - Article
+    - Technology
+- name: Reddit
+  url: https://www.reddit.com/.rss
+  tag_list:
+    - Random
+- name: TechCrunch
+  url: https://techcrunch.com/feed/?guccounter=1
+  tag_list:
+    - News
+    - Technology
+- name: Wired
+  url: https://www.wired.com/feed/rss
+  tag_list:
+    - News
+    - Technology
+- name: The Atlantic
+  url: https://www.theatlantic.com/feed/all/
+  tag_list:
+    - Article
+- name: Singularity Hub
+  url: https://singularityhub.com/feed/
+  tag_assignments_attributes:
+    - Technology
+    - News
+- name: IEEE Spectrum
+  url: https://spectrum.ieee.org/feeds/feed.rss
+  tag_list:
+    - News
+    - Technology
+- name: Product Hunt
+  url: https://www.producthunt.com/feed
+  tag_list:
+    - App
+    - Technology

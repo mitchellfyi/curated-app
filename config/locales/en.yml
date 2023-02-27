@@ -31,3 +31,15 @@
 
 en:
   hello: "Hello world"
+
+
+  tags:
+    - Question
+    - Job
+    - News
+    - Event
+    - Product
+    - Service
+    - App
+    - Tutorial
+    - Article

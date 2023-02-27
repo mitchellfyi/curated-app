@@ -1,20 +1,41 @@
 class Account < ApplicationRecord
   resourcify
+  acts_as_taggable_on :tags
 
   has_many :sources
   has_many :items, through: :sources
 
-  def domain_or_subdomain
-    if subdomain.present?
+  accepts_nested_attributes_for :sources, allow_destroy: true, reject_if: :all_blank
+
+  validates_presence_of :domain, unless: :subdomain?
+  validates_presence_of :subdomain, unless: :domain?
+
+  before_save :set_initial_tags, if: proc { tag_list.empty? }
+  before_save :set_initial_sources, if: proc { keyphrases.any? }
+
+  def host
+    if domain.present?
+      domain
+    else
       port = ApplicationController.helpers.app_uri.port
 
       "#{subdomain}.#{ApplicationController.helpers.app_uri.host}" + (port ? ":#{port}" : '')
-    else
-      domain
     end
   end
 
   def url
-    "//#{domain_or_subdomain}"
+    "//#{host}"
+  end
+
+  def set_initial_tags
+    return unless tag_list.empty?
+
+    self.tag_list += I18n.t('tags')
+  end
+
+  def set_initial_sources
+    return unless keyphrases.any?
+
+    self.sources += SourcesInitialService.call(keyphrases)
   end
 end

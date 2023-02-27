@@ -1,6 +1,6 @@
-require_relative "boot"
+require_relative 'boot'
 
-require "rails/all"
+require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -34,5 +34,7 @@ module Curated
     config.generators do |g|
       g.orm :active_record, primary_key_type: :uuid
     end
+
+    config.active_record.schema_format = :sql
   end
 end

@@ -1,0 +1,13 @@
+- name: Medium - ${keyphrase}
+  url: https://medium.com/feed/tag/${keyphrase.parameterize}
+  tag_list:
+    - Article
+- name: Hacker News - ${keyphrase}
+  url: https://hnrss.org/newest?q=${keyphrase.encode}&points=3
+  tag_list:
+    - News
+    - Technology
+- name: Indeed - ${keyphrase}
+  url: https://www.indeed.com/rss?q=title%3A${keyphrase.encode}
+  tag_list:
+    - Job
