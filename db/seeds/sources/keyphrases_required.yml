@@ -149,7 +149,7 @@
     - Article
 - name: Singularity Hub
   url: https://singularityhub.com/feed/
-  tag_assignments_attributes:
+  tag_list:
     - Technology
     - News
 - name: IEEE Spectrum

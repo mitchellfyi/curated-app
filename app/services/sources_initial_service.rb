@@ -10,19 +10,23 @@ class SourcesInitialService < ApplicationService
   end
 
   def per_keyphrase_template
-    @per_keyphrase_template ||= YAML.load_file(File.join(Rails.root, 'db/seeds/sources/per_keyphrase.yml')).to_json
+    @per_keyphrase_template ||= YAML.load_file(File.join(Rails.root, 'db/seeds/sources/per_keyphrase.yml'))
   end
 
-  def per_keyphrase_sources
+  def sources_per_keyphrase
     results = []
 
     @keyphrases.each do |keyphrase|
-      template_json = @per_keyphrase_template
-                      .gsub('${keyword}', keyphrase)
-                      .gsub('${keyword.encode}', keyphrase.parameterize(separator: '+'))
-                      .gsub('${keyword.parameterize}', keyphrase.parameterize)
+      keyphrase = ActionController::Base.helpers.sanitize(keyphrase).to_json[1..-2]
+      template_json = per_keyphrase_template
+                      .to_json
+                      .gsub('${keyphrase}', keyphrase)
+                      .gsub('${keyphrase.encode}', CGI.escape(keyphrase))
+                      .gsub('${keyphrase.parameterize}', keyphrase.parameterize)
 
-      results.concat(JSON.parse(template_json).map(&:deep_symbolize_keys!))
+      JSON.parse(template_json).each do |attributes|
+        results.push(Source.new(attributes))
+      end
     end
 
     results
@@ -32,16 +36,20 @@ class SourcesInitialService < ApplicationService
     @keyphrases_required_template ||= YAML.load_file(File.join(Rails.root, 'db/seeds/sources/keyphrases_required.yml'))
   end
 
-  def keyphrases_required_sources
-    @keyphrases_required_template.map do |source|
-      source[:keyphrases] = keyphrases
-      source
+  def sources_with_keyphrases
+    keyphrases_required_template.map do |attributes|
+      attributes[:keyphrases] = keyphrases
+
+      Source.new(attributes)
     end
   end
 
   def call
     return if @keyphrases.blank?
 
-    per_keyphrase_sources.concat(keyphrases_required_sources).uniq.map(&:deep_symbolize_keys!)
+    []
+      .concat(sources_per_keyphrase)
+      .concat(sources_with_keyphrases)
+      .uniq
   end
 end
