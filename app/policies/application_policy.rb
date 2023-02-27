@@ -17,7 +17,7 @@ class ApplicationPolicy
   end
 
   def create?
-    true
+    user.present?
   end
 
   def new?
@@ -25,10 +25,13 @@ class ApplicationPolicy
   end
 
   def update?
-    user.has_role?(:owner, record) ||
-      user.has_role?(:staff, record) ||
-      user.has_role?(:developer) ||
-      user.has_role?(:staff)
+    user.present? &&
+      (
+        user.has_role?(:owner, record) ||
+        user.has_role?(:staff, record) ||
+        user.has_role?(:developer) ||
+        user.has_role?(:staff)
+      )
   end
 
   def edit?
@@ -36,9 +39,12 @@ class ApplicationPolicy
   end
 
   def destroy?
-    user.has_role?(:owner, record) ||
-      user.has_role?(:developer) ||
-      user.has_role?(:staff)
+    user.present? &&
+      (
+        user.has_role?(:owner, record) ||
+        user.has_role?(:developer) ||
+        user.has_role?(:staff)
+      )
   end
 
   class Scope

@@ -3,9 +3,10 @@
 <div id="accounts">
   <% @accounts.each do |account| %>
     <p>
-      <%= link_to account.name, account.url %>
-      <br />
-      <%= link_to "Show this account", account %>
+      <%= link_to (account.name || account.host), account %>
+      <% if policy(account).update? %>
+        <%= link_to "Edit", edit_account_path(account) %>
+      <% end %>
     </p>
   <% end %>
 </div>

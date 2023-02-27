@@ -38,7 +38,7 @@ class AccountsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should show account' do
     get account_url(@account)
-    assert_response :success
+    assert_redirected_to @account.url
   end
 
   test 'should get edit' do
@@ -69,12 +69,12 @@ class AccountsControllerTest < ActionDispatch::IntegrationTest
 
     users(:example).add_role(:staff, @account)
     patch account_url(@account), params: { account: { name: 'example' } }
-    assert_redirected_to account_url(@account)
+    assert_redirected_to edit_account_url(@account)
 
     users(:example).remove_role(:staff, @account)
     users(:example).add_role(:owner, @account)
     patch account_url(@account), params: { account: { name: 'example' } }
-    assert_redirected_to account_url(@account)
+    assert_redirected_to edit_account_url(@account)
   end
 
   test 'should destroy account' do
@@ -98,6 +98,6 @@ class AccountsControllerTest < ActionDispatch::IntegrationTest
       delete account_url(@account)
     end
 
-    assert_redirected_to accounts_url
+    assert_redirected_to root_url(subdomain: false)
   end
 end
