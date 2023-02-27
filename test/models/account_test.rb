@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: accounts
+#
+#  id         :uuid             not null, primary key
+#  domain     :string
+#  keyphrases :text             default([]), is an Array
+#  name       :string
+#  subdomain  :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
 require 'test_helper'
 
 class AccountTest < ActiveSupport::TestCase
@@ -6,9 +18,17 @@ class AccountTest < ActiveSupport::TestCase
   end
 
   test 'account can be created with a domain and/or subdomain' do
-    assert Account.new(domain: 'example.com').valid?
-    assert Account.new(domain: 'example.com', subdomain: 'example').valid?
-    assert Account.new(subdomain: 'example').valid?
+    assert Account.new(domain: 'example123.com').valid?
+    assert Account.new(domain: 'example123.com', subdomain: 'example123').valid?
+    assert Account.new(subdomain: 'example123').valid?
+  end
+
+  test 'account domain must be unique' do
+    assert_not Account.new(domain: 'example.com').valid?
+  end
+
+  test 'account subdomain must be unique' do
+    assert_not Account.new(subdomain: 'example').valid?
   end
 
   test 'account host returns domain if present' do

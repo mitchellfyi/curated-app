@@ -1,6 +1,10 @@
 require 'test_helper'
 
 class SourcesInitialServiceTest < ActiveSupport::TestCase
+  setup do
+    ActsAsTenant.current_tenant = accounts(:example)
+  end
+
   test 'keyphrases_escaped escapes characters in keyphrases' do
     keyphrase = '!@#$%^&*()_+{}|:"<>?[];'
     service = SourcesInitialService.new([keyphrase])
@@ -18,7 +22,7 @@ class SourcesInitialServiceTest < ActiveSupport::TestCase
     assert service.per_keyphrase_template.any?
 
     service.per_keyphrase_template.each do |attributes|
-      assert accounts(:example).sources.new(attributes).valid?
+      assert Source.new(attributes).valid?
     end
   end
 
@@ -47,7 +51,7 @@ class SourcesInitialServiceTest < ActiveSupport::TestCase
     assert_equal sources_template_size * keyphrases.size, service.sources_per_keyphrase.size
 
     service.sources_per_keyphrase.each do |source|
-      assert accounts(:example).sources.new(source.attributes).valid?
+      assert Source.new(source.attributes).valid?
       assert source.to_json.include?(keyphrases.first) || source.to_json.include?(keyphrases.last)
     end
   end
@@ -57,7 +61,7 @@ class SourcesInitialServiceTest < ActiveSupport::TestCase
     assert service.keyphrases_required_template.any?
 
     service.keyphrases_required_template.each do |attributes|
-      assert accounts(:example).sources.new(attributes).valid?
+      assert Source.new(attributes).valid?
     end
   end
 
@@ -67,7 +71,7 @@ class SourcesInitialServiceTest < ActiveSupport::TestCase
     assert_equal service.keyphrases_required_template.size, service.sources_with_keyphrases.size
 
     service.sources_with_keyphrases.each do |source|
-      assert accounts(:example).sources.new(source.attributes).valid?
+      assert Source.new(source.attributes).valid?
       assert_equal source.keyphrases, keyphrases
     end
   end

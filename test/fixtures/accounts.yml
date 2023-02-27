@@ -1,2 +1,15 @@
+# == Schema Information
+#
+# Table name: accounts
+#
+#  id         :uuid             not null, primary key
+#  domain     :string
+#  keyphrases :text             default([]), is an Array
+#  name       :string
+#  subdomain  :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
 example:
-  domain: example.com
+  domain: $LABEL.com
+  subdomain: $LABEL

@@ -7,8 +7,8 @@ class Account < ApplicationRecord
 
   accepts_nested_attributes_for :sources, allow_destroy: true, reject_if: :all_blank
 
-  validates_presence_of :domain, unless: :subdomain?
-  validates_presence_of :subdomain, unless: :domain?
+  validates :domain, presence: true, uniqueness: true, unless: :subdomain?
+  validates :subdomain, presence: true, uniqueness: true, unless: :domain?
 
   before_save :set_initial_tags, if: proc { tag_list.empty? }
   before_save :set_initial_sources, if: proc { keyphrases.any? }

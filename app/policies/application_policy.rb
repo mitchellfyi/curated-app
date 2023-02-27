@@ -25,7 +25,10 @@ class ApplicationPolicy
   end
 
   def update?
-    user.has_role?(:staff, record) || user.has_role?(:developer) || user.has_role?(:staff)
+    user.has_role?(:owner, record) ||
+      user.has_role?(:staff, record) ||
+      user.has_role?(:developer) ||
+      user.has_role?(:staff)
   end
 
   def edit?
@@ -33,7 +36,9 @@ class ApplicationPolicy
   end
 
   def destroy?
-    user.has_role?(:staff, record) || user.has_role?(:developer) || user.has_role?(:staff)
+    user.has_role?(:owner, record) ||
+      user.has_role?(:developer) ||
+      user.has_role?(:staff)
   end
 
   class Scope
