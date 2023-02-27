@@ -92,5 +92,4 @@ class SourcesInitialServiceTest < ActiveSupport::TestCase
     sources = SourcesInitialService.call(keyphrases)
     assert_equal sources.size, sources.uniq.size
   end
-
 end

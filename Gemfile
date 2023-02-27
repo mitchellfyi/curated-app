@@ -89,3 +89,7 @@ gem 'rolify', '~> 6.0'
 gem 'acts-as-taggable-on', '~> 9.0'
 
 gem "annotate", "~> 3.2"
+
+gem "chronic", "~> 0.10.2"
+
+gem "feedjira", "~> 3.2"

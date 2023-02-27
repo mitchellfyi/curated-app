@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rss version="2.0">
+  <channel>
+    <item>
+      <title>example 1</title>
+      <link>https://example.org/1</link>
+      <pubDate>Wed, 22 Feb 2023 13:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>example 2?</title>
+      <link>https://example.org/2</link>
+      <pubDate>Wed, 22 Feb 2023 12:00 GMT</pubDate>
+    </item>
+  </channel>
+</rss>
