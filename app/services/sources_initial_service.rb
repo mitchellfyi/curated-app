@@ -9,22 +9,33 @@ class SourcesInitialService < ApplicationService
     @keyphrases = keyphrases
   end
 
+  def keyphrases_escaped
+    @keyphrases_escaped ||= @keyphrases.map do |keyphrase|
+      ActionController::Base.helpers.sanitize(keyphrase).to_json[1..-2]
+    end
+  end
+
   def per_keyphrase_template
     @per_keyphrase_template ||= YAML.load_file(File.join(Rails.root, 'db/seeds/sources/per_keyphrase.yml'))
+  end
+
+  def replace_keyphrases(template, keyphrase)
+    JSON.parse(
+      template
+        .to_json
+        .gsub('${keyphrase}', keyphrase)
+        .gsub('${keyphrase.encode}', CGI.escape(keyphrase))
+        .gsub('${keyphrase.parameterize}', keyphrase.parameterize)
+    )
   end
 
   def sources_per_keyphrase
     results = []
 
     @keyphrases.each do |keyphrase|
-      keyphrase = ActionController::Base.helpers.sanitize(keyphrase).to_json[1..-2]
-      template_json = per_keyphrase_template
-                      .to_json
-                      .gsub('${keyphrase}', keyphrase)
-                      .gsub('${keyphrase.encode}', CGI.escape(keyphrase))
-                      .gsub('${keyphrase.parameterize}', keyphrase.parameterize)
+      sources_attributes = replace_keyphrases(per_keyphrase_template, keyphrase)
 
-      JSON.parse(template_json).each do |attributes|
+      sources_attributes.each do |attributes|
         results.push(Source.new(attributes))
       end
     end

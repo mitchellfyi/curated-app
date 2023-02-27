@@ -1,6 +1,18 @@
 require 'test_helper'
 
 class SourcesInitialServiceTest < ActiveSupport::TestCase
+  test 'keyphrases_escaped escapes characters in keyphrases' do
+    keyphrase = '!@#$%^&*()_+{}|:"<>?[];'
+    service = SourcesInitialService.new([keyphrase])
+    assert_not service.keyphrases_escaped.include?(keyphrase)
+  end
+
+  test 'keyphrases_escaped escapes html in keyphrases' do
+    keyphrase = '<script>'
+    service = SourcesInitialService.new([keyphrase])
+    assert_not service.keyphrases_escaped.include?(keyphrase)
+  end
+
   test 'per_keyphrase_template returns valid source attributes' do
     service = SourcesInitialService.new
     assert service.per_keyphrase_template.any?
@@ -8,6 +20,24 @@ class SourcesInitialServiceTest < ActiveSupport::TestCase
     service.per_keyphrase_template.each do |attributes|
       assert accounts(:example).sources.new(attributes).valid?
     end
+  end
+
+  test 'replace_keyphrases replaces keyphrases' do
+    keyphrase = 'example'
+    service = SourcesInitialService.new
+    assert_equal service.replace_keyphrases('${keyphrase}', keyphrase), keyphrase
+  end
+
+  test 'replace_keyphrases encodes keyphrases' do
+    keyphrase = 'example 1 !@#$%^&*()_+{}|:"<>?[];'
+    service = SourcesInitialService.new
+    assert service.replace_keyphrases('${keyphrase.encode}', keyphrase).include?('example+1+')
+  end
+
+  test 'replace_keyphrases parameterizes keyphrases' do
+    keyphrase = 'example 1 !@#$%^&*()_+{}|:"<>?[];'
+    service = SourcesInitialService.new
+    assert service.replace_keyphrases('${keyphrase.parameterize}', keyphrase).include?('example-1-')
   end
 
   test 'sources_per_keyphrase returns sources with keyphrases' do
@@ -19,48 +49,6 @@ class SourcesInitialServiceTest < ActiveSupport::TestCase
     service.sources_per_keyphrase.each do |source|
       assert accounts(:example).sources.new(source.attributes).valid?
       assert source.to_json.include?(keyphrases.first) || source.to_json.include?(keyphrases.last)
-    end
-  end
-
-  test 'sources_per_keyphrase escapes characters in keyphrases' do
-    keyphrases = ['!@#$%^&*()_+{}|:"<>?[];']
-    service = SourcesInitialService.new(keyphrases)
-
-    service.stub :per_keyphrase_template, [{ name: '${keyphrase}' }] do
-      source = service.sources_per_keyphrase.first
-      assert_not source.name.include?('!@#$%^&*()_+{}|:"<>?[];')
-    end
-  end
-
-  test 'sources_per_keyphrase escapes html in keyphrases' do
-    keyphrases = ['<script>']
-    service = SourcesInitialService.new(keyphrases)
-
-    service.stub :per_keyphrase_template, [{ name: '${keyphrase}' }] do
-      source = service.sources_per_keyphrase.first
-      assert_not source.name.include?('<script>')
-    end
-  end
-
-  test 'sources_per_keyphrase encodes keyphrases' do
-    keyphrases = ['example 1 !@#$%^&*()_+{}|:"<>?[];']
-    service = SourcesInitialService.new(keyphrases)
-
-    service.stub :per_keyphrase_template, [{ name: '${keyphrase.encode}' }] do
-      source = service.sources_per_keyphrase.first
-      assert source.name.include?('example+1+')
-      assert_not source.name.include?('!@#$%^&*()_+{}|:"<>?[];')
-    end
-  end
-
-  test 'sources_per_keyphrase parameterizes keyphrases' do
-    keyphrases = ['example 1 !@#$%^&*()_+{}|:"<>?[];']
-    service = SourcesInitialService.new(keyphrases)
-
-    service.stub :per_keyphrase_template, [{ name: '${keyphrase.parameterize}' }] do
-      source = service.sources_per_keyphrase.first
-      assert source.name.include?('example-1-')
-      assert_not source.name.include?('!@#$%^&*()_+{}|:"<>?[];')
     end
   end
 
