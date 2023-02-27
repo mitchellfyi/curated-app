@@ -2,9 +2,9 @@ module ApplicationHelper
   def app_uri
     host = Rails.application.credentials.dig(:app, :host)
     scheme = 'https'
-    
-    if Rails.env.development?
-      host = "#{host.split('.').first}.localhost" 
+
+    if Rails.env.development? || Rails.env.test?
+      host = "#{host.split('.').first}.localhost"
       scheme = 'http'
       port = 5000
     end

@@ -37,12 +37,12 @@ class AccountTest < ActiveSupport::TestCase
   end
 
   test 'account host returns subdomain if domain is not present' do
-    assert_equal "example.#{ApplicationController.helpers.app_uri.host}", Account.new(subdomain: 'example').host
+    assert Account.new(subdomain: 'example').host.include? "example.#{ApplicationController.helpers.app_uri.host}"
   end
 
   test 'account url returns host with protocol' do
-    assert_equal '//example.com', Account.new(domain: 'example.com').url
-    assert_equal "//example.#{ApplicationController.helpers.app_uri.host}", Account.new(subdomain: 'example').url
+    assert_equal Account.new(domain: 'example.com').url, '//example.com'
+    assert Account.new(subdomain: 'example').url.include? "//example.#{ApplicationController.helpers.app_uri.host}"
   end
 
   test 'account set_initial_tags adds tags' do

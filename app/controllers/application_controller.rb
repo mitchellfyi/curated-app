@@ -34,6 +34,10 @@ class ApplicationController < ActionController::Base
     stored_location_for(resource_or_scope) || super
   end
 
+  def default_url_options
+    { port: ApplicationController.helpers.app_uri.port }
+  end
+
   private
 
   def set_tenant
