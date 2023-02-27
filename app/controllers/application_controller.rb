@@ -41,7 +41,11 @@ class ApplicationController < ActionController::Base
   private
 
   def set_tenant
-    current_account = Account.where(subdomain: request.subdomain).or(Account.where(domain: request.domain)).first
+    if request.domain != helpers.app_uri.host
+      current_account = Account.where(domain: request.domain).first
+    elsif request.subdomain.present?
+      current_account = Account.where(subdomain: request.subdomain).first
+    end
     set_current_tenant(current_account)
 
     return unless current_tenant.nil? && !devise_controller?
