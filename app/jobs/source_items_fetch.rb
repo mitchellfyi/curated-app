@@ -1,9 +1,9 @@
 class SourceItemsFetch < Que::Job
   include Que::Unique
 
-  self.priority = 20
+  self.priority = 10
 
-  def run(source_id)
-    Source.find(source_id).fetch_items!
+  def run(id)
+    Source.find(id).fetch_items!
   end
 end

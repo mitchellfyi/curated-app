@@ -1,2 +1,8 @@
-SourceFetch:
+AccountSchedule:
+  cron: "@hourly"
+
+SourceSchedule:
+  cron: "@hourly"
+
+ItemSchedule:
   cron: "@hourly"
