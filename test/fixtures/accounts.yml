@@ -10,6 +10,6 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-example:
-  domain: $LABEL.com
-  subdomain: $LABEL
+current_tenant:
+  domain: current_tenant.domain
+  subdomain: current_tenant

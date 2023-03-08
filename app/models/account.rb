@@ -50,4 +50,8 @@ class Account < ApplicationRecord
 
     self.sources += SourcesInitialService.call(keyphrases)
   end
+
+  def create_items_from_source!
+
+  end
 end
