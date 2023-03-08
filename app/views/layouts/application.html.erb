@@ -5,24 +5,34 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.*/css/pico.min.css" />
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <% if user_signed_in? %>
-      <%= link_to current_user.username, edit_user_registration_path %>
-      <%= link_to "Log out", destroy_user_session_path %>
-    <% else %>
-      <%= link_to "Log in", new_user_session_path %>
-      <%= link_to "Register", new_user_registration_path %>
-    <% end %>
+    <header>
+      <nav class="container">
+        <h1><%= link_to (current_tenant&.name || Rails.application.credentials.dig(:app, :name)), root_path %></h1>
+        <div>
+          <% if user_signed_in? %>
+            <%= link_to "My Collection", edit_user_registration_path %>
+            <%= link_to "Log out", destroy_user_session_path %>
+          <% else %>
+            <%= link_to "Log in", new_user_session_path %>
+            <%= link_to "Register", new_user_registration_path %>
+          <% end %>
+        </div>
+      </nav>
+    </header>
 
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
 
-    <%= yield %>
+    <div class="container">
+      <%= yield %>
+    </div>
 
     <footer>
       <% if current_tenant %>
