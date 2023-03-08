@@ -22,15 +22,10 @@
 #  fk_rails_...  (account_id => accounts.id)
 #  fk_rails_...  (source_id => sources.id)
 #
-class Item < ApplicationRecord
-  acts_as_tenant(:account)
-  acts_as_taggable_on(:tags)
-  
-  belongs_to :source, optional: true
+require 'test_helper'
 
-  scope :ready_to_fetch, -> { where('fetched_at IS NULL OR fetched_at < ?', 30.days.ago) }
-
-  def fetch!
-    update(fetched_at: Time.now)
+class ItemTest < ActiveSupport::TestCase
+  setup do
+    ActsAsTenant.current_tenant = accounts(:current_tenant)
   end
 end
