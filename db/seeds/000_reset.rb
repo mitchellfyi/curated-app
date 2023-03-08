@@ -12,5 +12,5 @@ end
 
 # Que.clear!
 
-# pp %i[db reset]
-# Rake::Task['db:migrate:reset'].invoke
+pp %i[db reset]
+Rake::Task['db:migrate:reset'].invoke

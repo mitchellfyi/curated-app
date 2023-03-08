@@ -360,7 +360,8 @@ CREATE TABLE public.items (
     url character varying,
     content text,
     created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    updated_at timestamp(6) without time zone NOT NULL,
+    fetched_at timestamp(6) without time zone
 );
 
 
@@ -478,9 +479,9 @@ CREATE TABLE public.sources (
     name character varying,
     url character varying,
     keyphrases text[] DEFAULT '{}'::text[],
-    fetched_at timestamp(6) without time zone,
     created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    updated_at timestamp(6) without time zone NOT NULL,
+    fetched_at timestamp(6) without time zone
 );
 
 

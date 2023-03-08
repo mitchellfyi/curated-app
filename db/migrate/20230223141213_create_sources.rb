@@ -7,8 +7,8 @@ class CreateSources < ActiveRecord::Migration[7.0]
       t.string :url
       t.text :keyphrases, array: true, default: []
 
-      t.datetime :fetched_at
       t.timestamps
+      t.datetime :fetched_at
     end
   end
 end

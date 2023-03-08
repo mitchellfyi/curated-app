@@ -9,6 +9,7 @@ class CreateItems < ActiveRecord::Migration[7.0]
       t.text :content
 
       t.timestamps
+      t.datetime :fetched_at
     end
   end
 end
