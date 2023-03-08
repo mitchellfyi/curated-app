@@ -4,6 +4,6 @@ class SourceItemsFetch < Que::Job
   self.priority = 10
 
   def run(id)
-    Source.find(id).fetch_items!
+    Source.find(id).fetch!
   end
 end

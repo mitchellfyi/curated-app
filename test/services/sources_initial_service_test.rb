@@ -2,7 +2,7 @@ require 'test_helper'
 
 class SourcesInitialServiceTest < ActiveSupport::TestCase
   setup do
-    ActsAsTenant.current_tenant = accounts(:example)
+    ActsAsTenant.current_tenant = accounts(:current_tenant)
   end
 
   test 'keyphrases_escaped escapes characters in keyphrases' do

@@ -4,9 +4,9 @@ class AccountSchedule < Que::Job
   self.priority = 20
 
   def run
-    Account.ready_for_items.find_each do |account|
+    Account.find_each do |account|
       account.sources.has_new_items.find_each do |source|
-        AccountItemsFromSource.enqueue(account.id, source.id)
+        AccountCreateItemsFromSource.enqueue(account.id, source.id)
       end
     end
   end
