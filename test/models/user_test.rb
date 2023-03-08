@@ -34,31 +34,30 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-  test 'user cannot be created without email' do
+  test 'user cannot be created without email or password' do
     assert_not User.new.valid?
-  end
-
-  test 'user cannot be created without password' do
-    assert_not User.new(email: 'test123456@example.com').valid?
+    assert_not User.new(email: 'username@example.domain').valid?
+    assert_not User.new(password: 'example').valid?
   end
 
   test 'user can be created with email and password' do
-    assert User.new(email: 'test123456@example.com', password: 'example').valid?
+    assert User.new(email: 'username@example.domain', password: 'example').valid?
   end
 
   test 'user email is unique' do
-    assert_not User.new(email: 'test123@example.com').valid?
+    assert User.create!(email: 'username@example.domain', password: 'example')
+    assert_not User.new(email: 'username@example.domain').valid?
   end
 
   test 'downcase_email downcases email' do
-    user = User.new(email: 'TEST123456@EXAMPLE.COM')
+    user = User.new(email: 'USERNAME@example.domain')
     user.downcase_email
-    assert_equal 'test123456@example.com', user.email
+    assert_equal 'username@example.domain', user.email
   end
 
   test 'set_username sets username to first part of email' do
-    user = User.new(email: 'test123456@example.com')
+    user = User.new(email: 'username@example.domain')
     user.set_username
-    assert_equal 'test123456', user.username
+    assert_equal 'username', user.username
   end
 end
