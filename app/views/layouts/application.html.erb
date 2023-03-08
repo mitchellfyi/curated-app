@@ -16,6 +16,10 @@
       <nav class="container">
         <h1><%= link_to (current_tenant&.name || Rails.application.credentials.dig(:app, :name)), root_path %></h1>
         <div>
+          <% if current_tenant %>
+            <%= link_to "Items", items_path %>
+            <%= link_to "Sources", sources_path %>
+          <% end %>
           <% if user_signed_in? %>
             <%= link_to "My Account", edit_user_registration_path %>
             <%= link_to "Log out", destroy_user_session_path %>
@@ -27,17 +31,21 @@
       </nav>
     </header>
 
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-
     <div class="container">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+
       <%= yield %>
     </div>
 
     <footer>
-      <% if current_tenant %>
-        <%= link_to "Powered by #{Rails.application.credentials.dig(:app, :name)}", root_url(subdomain: false) %>
-      <% end %>
+      <div class="container">
+        <% if current_tenant %>
+          <small>
+            <%= link_to "Powered by #{Rails.application.credentials.dig(:app, :name)}", root_url(subdomain: false) %>
+          </small>
+        <% end %>
+      </div>
     </footer>
   </body>
 </html>
