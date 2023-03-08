@@ -25,3 +25,9 @@ nav {
     margin: 0;
   }
 }
+
+
+main {
+  min-height: calc(100vh - 340px);
+  padding-top: 0 !important;
+}
