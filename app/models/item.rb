@@ -29,6 +29,7 @@ class Item < ApplicationRecord
   belongs_to :source, optional: true
 
   scope :ready_to_fetch, -> { where('fetched_at IS NULL OR fetched_at < ?', 30.days.ago) }
+  scope :expired, -> { where('updated_at < ?', 30.days.ago) }
 
   def fetch!
     update(fetched_at: Time.now)
