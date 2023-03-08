@@ -36,5 +36,11 @@ module Curated
     end
 
     config.active_record.schema_format = :sql
+
+    config.action_mailer.deliver_later_queue_name = :default
+    config.action_mailbox.queues.incineration = :default
+    config.action_mailbox.queues.routing = :default
+    config.active_storage.queues.analysis = :default
+    config.active_storage.queues.purge = :default
   end
 end
