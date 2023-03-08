@@ -265,10 +265,10 @@ $$;
 
 
 --
--- Name: accounts; Type: TABLE; Schema: public; Owner: -
+-- Name: collections; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public.accounts (
+CREATE TABLE public.collections (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     name character varying,
     subdomain character varying,
@@ -354,7 +354,7 @@ CREATE TABLE public.ar_internal_metadata (
 
 CREATE TABLE public.items (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
-    account_id uuid NOT NULL,
+    collection_id uuid NOT NULL,
     source_id uuid,
     title character varying,
     url character varying,
@@ -475,7 +475,7 @@ CREATE TABLE public.schema_migrations (
 
 CREATE TABLE public.sources (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
-    account_id uuid NOT NULL,
+    collection_id uuid NOT NULL,
     name character varying,
     url character varying,
     keyphrases text[] DEFAULT '{}'::text[],
@@ -588,11 +588,11 @@ ALTER TABLE ONLY public.que_jobs ALTER COLUMN id SET DEFAULT nextval('public.que
 
 
 --
--- Name: accounts accounts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: collections collections_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.accounts
-    ADD CONSTRAINT accounts_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.collections
+    ADD CONSTRAINT collections_pkey PRIMARY KEY (id);
 
 
 --
@@ -759,10 +759,10 @@ CREATE UNIQUE INDEX index_active_storage_variant_records_uniqueness ON public.ac
 
 
 --
--- Name: index_items_on_account_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_items_on_collection_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_items_on_account_id ON public.items USING btree (account_id);
+CREATE INDEX index_items_on_collection_id ON public.items USING btree (collection_id);
 
 
 --
@@ -787,10 +787,10 @@ CREATE INDEX index_roles_on_resource ON public.roles USING btree (resource_type,
 
 
 --
--- Name: index_sources_on_account_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_sources_on_collection_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_sources_on_account_id ON public.sources USING btree (account_id);
+CREATE INDEX index_sources_on_collection_id ON public.sources USING btree (collection_id);
 
 
 --
@@ -1036,7 +1036,7 @@ CREATE TRIGGER que_state_notify AFTER INSERT OR DELETE OR UPDATE ON public.que_j
 --
 
 ALTER TABLE ONLY public.items
-    ADD CONSTRAINT fk_rails_13270fc162 FOREIGN KEY (account_id) REFERENCES public.accounts(id);
+    ADD CONSTRAINT fk_rails_13270fc162 FOREIGN KEY (collection_id) REFERENCES public.collections(id);
 
 
 --
@@ -1060,7 +1060,7 @@ ALTER TABLE ONLY public.taggings
 --
 
 ALTER TABLE ONLY public.sources
-    ADD CONSTRAINT fk_rails_a23e831c14 FOREIGN KEY (account_id) REFERENCES public.accounts(id);
+    ADD CONSTRAINT fk_rails_a23e831c14 FOREIGN KEY (collection_id) REFERENCES public.collections(id);
 
 
 --

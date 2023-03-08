@@ -2,7 +2,7 @@ require 'test_helper'
 
 class SourcesInitialServiceTest < ActiveSupport::TestCase
   setup do
-    ActsAsTenant.current_tenant = accounts(:current_tenant)
+    ActsAsTenant.current_tenant = collections(:current_tenant)
   end
 
   test 'keyphrases_escaped escapes characters in keyphrases' do
@@ -88,7 +88,7 @@ class SourcesInitialServiceTest < ActiveSupport::TestCase
   end
 
   test 'call does not return duplicates' do
-    keyphrases = ['example', 'example']
+    keyphrases = %w[example example]
     sources = SourcesInitialService.call(keyphrases)
     assert_equal sources.size, sources.uniq.size
   end

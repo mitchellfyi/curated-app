@@ -9,18 +9,18 @@
 #  url        :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  account_id :uuid             not null
+#  collection_id :uuid             not null
 #
 # Indexes
 #
-#  index_sources_on_account_id  (account_id)
+#  index_sources_on_collection_id  (collection_id)
 #
 # Foreign Keys
 #
-#  fk_rails_...  (account_id => accounts.id)
+#  fk_rails_...  (collection_id => collections.id)
 #
 class Source < ApplicationRecord
-  acts_as_tenant(:account)
+  acts_as_tenant(:collection)
   acts_as_taggable_on(:tags)
 
   has_many :items

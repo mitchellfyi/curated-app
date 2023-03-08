@@ -1,4 +1,4 @@
-AccountSchedule:
+CollectionSchedule:
   cron: "@hourly"
 
 SourceSchedule:

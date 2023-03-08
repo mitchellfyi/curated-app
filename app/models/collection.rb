@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: accounts
+# Table name: collections
 #
 #  id         :uuid             not null, primary key
 #  domain     :string
@@ -10,7 +10,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-class Account < ApplicationRecord
+class Collection < ApplicationRecord
   resourcify
   acts_as_taggable_on :tags
 
@@ -51,7 +51,5 @@ class Account < ApplicationRecord
     self.sources += SourcesInitialService.call(keyphrases)
   end
 
-  def create_items_from_source!
-
-  end
+  def create_items_from_source!; end
 end

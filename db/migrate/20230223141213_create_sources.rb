@@ -1,7 +1,7 @@
 class CreateSources < ActiveRecord::Migration[7.0]
   def change
     create_table(:sources, id: :uuid) do |t|
-      t.belongs_to :account, null: false, foreign_key: true, type: :uuid
+      t.belongs_to :collection, null: false, foreign_key: true, type: :uuid
 
       t.string :name
       t.string :url

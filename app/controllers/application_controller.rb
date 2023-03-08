@@ -42,15 +42,15 @@ class ApplicationController < ActionController::Base
 
   def set_tenant
     if request.domain != helpers.app_uri.host
-      current_account = Account.where(domain: request.domain).first
+      current_collection = Collection.where(domain: request.domain).first
     elsif request.subdomain.present?
-      current_account = Account.where(subdomain: request.subdomain).first
+      current_collection = Collection.where(subdomain: request.subdomain).first
     end
-    set_current_tenant(current_account)
+    set_current_tenant(current_collection)
 
     return unless current_tenant.nil? && !devise_controller?
 
-    redirect_to(accounts_url(subdomain: false, host: helpers.app_uri.host, port: helpers.app_uri.port),
+    redirect_to(collections_url(subdomain: false, host: helpers.app_uri.host, port: helpers.app_uri.port),
                 allow_other_host: true)
   end
 

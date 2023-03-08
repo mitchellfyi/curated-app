@@ -9,16 +9,16 @@
 #  url        :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  account_id :uuid             not null
+#  collection_id :uuid             not null
 #
 # Indexes
 #
-#  index_sources_on_account_id  (account_id)
+#  index_sources_on_collection_id  (collection_id)
 #
 # Foreign Keys
 #
-#  fk_rails_...  (account_id => accounts.id)
+#  fk_rails_...  (collection_id => collections.id)
 #
 current_tenant_source:
-  account: current_tenant
+  collection: current_tenant
   url: https://$LABEL.domain

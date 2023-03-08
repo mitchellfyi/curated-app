@@ -1,0 +1,14 @@
+<h1>Collections</h1>
+
+<div id="collections">
+  <% @collections.each do |collection| %>
+    <p>
+      <%= link_to (collection.name || collection.host), collection %>
+      <% if policy(collection).update? %>
+        <%= link_to "Edit", edit_collection_path(collection) %>
+      <% end %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New collection", new_collection_path %>

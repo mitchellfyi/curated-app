@@ -9,21 +9,21 @@
 #  url        :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  account_id :uuid             not null
+#  collection_id :uuid             not null
 #
 # Indexes
 #
-#  index_sources_on_account_id  (account_id)
+#  index_sources_on_collection_id  (collection_id)
 #
 # Foreign Keys
 #
-#  fk_rails_...  (account_id => accounts.id)
+#  fk_rails_...  (collection_id => collections.id)
 #
 require 'test_helper'
 
 class SourceTest < ActiveSupport::TestCase
   setup do
-    ActsAsTenant.current_tenant = accounts(:current_tenant)
+    ActsAsTenant.current_tenant = collections(:current_tenant)
   end
 
   test 'source cannot be created without a url' do
@@ -57,6 +57,7 @@ class SourceTest < ActiveSupport::TestCase
 
   test 'source can be created with a url, keyphrases and tags' do
     assert Source.new(url: 'http://example.domain', keyphrases: ['example-keyphrase'], tag_list: ['example-tag']).valid?
-    assert ActsAsTenant.current_tenant.sources.new(url: 'http://example.com', keyphrases: ['example-keyphrase'], tag_list: ['example-tag']).valid?
+    assert ActsAsTenant.current_tenant.sources.new(url: 'http://example.com', keyphrases: ['example-keyphrase'],
+                                                   tag_list: ['example-tag']).valid?
   end
 end

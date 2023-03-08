@@ -17,7 +17,7 @@
         <h1><%= link_to (current_tenant&.name || Rails.application.credentials.dig(:app, :name)), root_path %></h1>
         <div>
           <% if user_signed_in? %>
-            <%= link_to "My Collection", edit_user_registration_path %>
+            <%= link_to "My Account", edit_user_registration_path %>
             <%= link_to "Log out", destroy_user_session_path %>
           <% else %>
             <%= link_to "Log in", new_user_session_path %>

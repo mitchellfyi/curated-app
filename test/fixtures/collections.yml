@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: accounts
+# Table name: collections
 #
 #  id         :uuid             not null, primary key
 #  domain     :string
